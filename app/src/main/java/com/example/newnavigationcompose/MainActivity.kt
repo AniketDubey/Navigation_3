@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NewNavigationComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    InitialScreen(
+                    RootGraph(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

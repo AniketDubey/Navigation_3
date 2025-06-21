@@ -9,9 +9,11 @@ import androidx.navigation3.ui.NavDisplay
 import com.example.newnavigationcompose.destinationNav.DestinationScreen
 import com.example.newnavigationcompose.screen.EnterMobileNumberScreen
 import com.example.newnavigationcompose.screen.EnterMobileOTPScreen
+import com.example.newnavigationcompose.screen.EventLandingScreen
+import com.example.newnavigationcompose.screen.SettingScreen
 
 @Composable
-fun InitialScreen(modifier: Modifier = Modifier) {
+fun RootGraph(modifier: Modifier = Modifier) {
 //    val backStack = remember { mutableStateListOf<Any>(Destination.EnterMobileNumberScreen) }
     val backStack =
         rememberNavBackStack<DestinationScreen>(DestinationScreen.EnterMobileNumberScreen)
@@ -21,13 +23,27 @@ fun InitialScreen(modifier: Modifier = Modifier) {
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
         entryProvider = entryProvider {
-            entry<DestinationScreen.EnterMobileNumberScreen> { key ->
+
+            entry<DestinationScreen.EnterMobileNumberScreen> {
                 EnterMobileNumberScreen {
                     backStack.add(DestinationScreen.EnterOTPScreen)
                 }
             }
-            entry<DestinationScreen.EnterOTPScreen> { key ->
-                EnterMobileOTPScreen()
+
+            entry<DestinationScreen.EnterOTPScreen> {
+                EnterMobileOTPScreen(){
+                    backStack.add(DestinationScreen.EventLandingScreen)
+                }
+            }
+
+            entry<DestinationScreen.SettingScreen> {
+                SettingScreen()
+            }
+
+            entry<DestinationScreen.EventLandingScreen> {
+                EventLandingScreen {
+                    backStack.add(DestinationScreen.SettingScreen)
+                }
             }
         }
     )

@@ -12,5 +12,8 @@ sealed class DestinationScreen: NavKey {
     data object EnterOTPScreen: DestinationScreen()
 
     @Serializable
+    data object SettingScreen: DestinationScreen()
+
+    @Serializable
     data object EventLandingScreen: DestinationScreen()
 }
